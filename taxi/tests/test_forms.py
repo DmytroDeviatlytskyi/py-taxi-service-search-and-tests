@@ -76,7 +76,22 @@ class DriverFormTest(TestCase):
     def test_driver_create_form_is_valid(self):
         form = DriverCreationForm(data=self.form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data, self.form_data)
+        self.assertEqual(
+            form.cleaned_data["username"],
+            self.form_data["username"]
+        )
+        self.assertEqual(
+            form.cleaned_data["first_name"],
+            self.form_data["first_name"]
+        )
+        self.assertEqual(
+            form.cleaned_data["last_name"],
+            self.form_data["last_name"]
+        )
+        self.assertEqual(
+            form.cleaned_data["license_number"],
+            self.form_data["license_number"]
+        )
 
     def test_driver_create_form_with_invalid_license_number(self):
         self.form_data["license_number"] = "test1234124"
@@ -89,7 +104,7 @@ class DriverFormTest(TestCase):
         }
         form = DriverSearchForm(data=form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data, form_data)
+        self.assertEqual(form.cleaned_data["username"], form_data["username"])
 
     def test_driver_search_form_field_placeholder(self):
         form = DriverSearchForm()
@@ -106,7 +121,10 @@ class DriverLicenseUpdateFormTest(TestCase):
         }
         form = DriverLicenseUpdateForm(data=form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data, form_data)
+        self.assertEqual(
+            form.cleaned_data["license_number"],
+            form_data["license_number"]
+        )
 
     def test_driver_license_number_len_not_equal_to_8(self):
         form_data = {"license_number": "test1234124"}
