@@ -198,12 +198,12 @@ class PrivateDriverTest(TestCase):
             password="test123"
         )
         self.client.force_login(self.user)
-        Driver.objects.create(
+        Driver.objects.create_user(
             username="Driver_1",
             password="test1234",
             license_number="TES12345",
         )
-        Driver.objects.create(
+        Driver.objects.create_user(
             username="Driver_2",
             password="test1234",
             license_number="TES56789",

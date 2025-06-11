@@ -9,14 +9,14 @@ class DriverModelTest(TestCase):
         Driver.objects.create_user(
             username="test",
             password="test123",
-            license_number="test1234",
+            license_number="TES12345",
         )
 
     def test_create_driver(self):
         driver = Driver.objects.get(id=1)
         self.assertEqual(driver.username, "test")
         self.assertTrue(driver.check_password("test123"))
-        self.assertEqual(driver.license_number, "test1234")
+        self.assertEqual(driver.license_number, "TES12345")
 
     def test_driver_str(self):
         driver = Driver.objects.get(id=1)
@@ -55,7 +55,7 @@ class CarModelTest(TestCase):
         Driver.objects.create_user(
             username="test",
             password="test123",
-            license_number="test1234",
+            license_number="TES12345",
         )
 
         test_manufacturer = Manufacturer.objects.create(

@@ -20,13 +20,14 @@ class CarFormTest(TestCase):
         )
         form_data = {
             "model": "test_model",
-            "manufacturer": manufacturer,
-            "drivers": [driver, ],
+            "manufacturer": manufacturer.id,
+            "drivers": [driver.id, ],
         }
         form = CarForm(data=form_data)
-        print(form.errors)
         self.assertTrue(form.is_valid())
-        self.assertEqual(list(form.cleaned_data), list(form_data))
+        self.assertEqual(form.cleaned_data["model"], form_data["model"])
+        self.assertEqual(form.cleaned_data["manufacturer"], manufacturer)
+        self.assertTrue(driver in form.cleaned_data["drivers"])
 
     def test_car_search_form_is_valid(self):
         form_data = {
@@ -34,7 +35,7 @@ class CarFormTest(TestCase):
         }
         form = CarSearchForm(data=form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(list(form.cleaned_data), list(form_data))
+        self.assertEqual(form.cleaned_data["model"], form_data["model"])
 
     def test_car_search_form_field_placeholder(self):
         form = CarSearchForm()
@@ -51,7 +52,7 @@ class ManufacturerFormTest(TestCase):
         }
         form = ManufacturerSearchForm(data=form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(list(form.cleaned_data), list(form_data))
+        self.assertEqual(form.cleaned_data["name"], form_data["name"])
 
     def test_manufacturer_search_form_field_placeholder(self):
         form = ManufacturerSearchForm()
