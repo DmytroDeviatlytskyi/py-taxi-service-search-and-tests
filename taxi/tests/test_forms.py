@@ -127,16 +127,34 @@ class DriverLicenseUpdateFormTest(TestCase):
         )
 
     def test_driver_license_number_len_not_equal_to_8(self):
-        form_data = {"license_number": "test1234124"}
+        form_data = {
+            "username": "test_username",
+            "password1": "user12test",
+            "first_name": "test_first_name",
+            "last_name": "test_last_name",
+            "license_number": "test1234124",
+        }
         form = DriverCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
 
     def test_driver_license_number_has_not_5_digits(self):
-        form_data = {"license_number": "tes1234"}
+        form_data = {
+            "username": "test_username",
+            "password1": "user12test",
+            "first_name": "test_first_name",
+            "last_name": "test_last_name",
+            "license_number": "tes1234",
+        }
         form = DriverCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
 
     def test_driver_license_number_has_not_3_letters(self):
-        form_data = {"license_number": "te12345st"}
+        form_data = {
+            "username": "test_username",
+            "password1": "user12test",
+            "first_name": "test_first_name",
+            "last_name": "test_last_name",
+            "license_number": "te12345st",
+        }
         form = DriverCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
