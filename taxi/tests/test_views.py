@@ -1,10 +1,8 @@
 from django.contrib.auth import get_user_model
-from django.template.context_processors import request
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.urls import reverse
 
 from taxi.models import Manufacturer, Car, Driver
-from taxi.views import toggle_assign_to_car
 
 MANUFACTURER_LIST_URL = reverse("taxi:manufacturer-list")
 MANUFACTURER_CREATE_URL = reverse("taxi:manufacturer-create")
